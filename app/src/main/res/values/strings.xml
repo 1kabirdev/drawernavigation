@@ -5,4 +5,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="text_create_new">Создать новый</string>
+    <string name="text_kabir_agamirzaev">Kabir Agamirzaev</string>
+    <string name="text_kabiragamirzaev_gmail_com">kabiragamirzaev@gmail.com</string>
 </resources>
