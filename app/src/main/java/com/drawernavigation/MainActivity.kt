@@ -1,6 +1,7 @@
 package com.drawernavigation
 
 import android.os.Bundle
+import android.os.Message
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -9,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.drawernavigation.fragment.*
 import com.google.android.material.navigation.NavigationView
 
 
@@ -31,6 +35,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView = findViewById<View>(R.id.nvView) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
+
+        val fragmentManager = supportFragmentManager
+        val fragment = HomeFragment()
+        fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
     }
 
     override fun onBackPressed() {
@@ -55,9 +63,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
 
+        var fragment: Fragment? = null
+        val fragmentManager: FragmentManager = supportFragmentManager
+
+        when (item.itemId) {
+            R.id.nav_home -> {
+                fragment = HomeFragment()
+            }
+            R.id.nav_gallery -> {
+                fragment = GalleryFragment()
+            }
+            R.id.nav_profile -> {
+                fragment = ProfileFragment()
+            }
+            R.id.nav_setting -> {
+                fragment = SettingFragment()
+            }
+            R.id.nav_message -> {
+                fragment = MessageFragment()
+            }
         }
+        fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment!!).commit()
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
